@@ -1,6 +1,10 @@
 package assignment.dictionary;
 
+import javafx.scene.shape.Line;
+
 import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -27,16 +31,14 @@ public class LinesToDisplay {
 
     /**
      * Add a new wordlet to the current line.
-     *
      */
     public void addWordlet(Wordlet w) {
-        lines.get(currentLine).add(w);  // Add the Wordlet to the current line
+        lines.getEntry(currentLine).add(w);  // Add the Wordlet to the current line
     }
 
     /**
      * Go to the next line, if the number of lines has exceeded LINES, shift
      * them all up by one
-     *
      */
     public void nextLine() {
         currentLine++;
@@ -47,12 +49,16 @@ public class LinesToDisplay {
         }
     }
 
-      
-    public int getCurrentLine(){
+
+    public int getCurrentLine() {
         return currentLine;
     }
-    
-    public AList<Wordlet>[] getLines(){
+
+    public AList<AList<Wordlet>> getLines() {
         return lines;
     }
+
+    public void addLine(Line newLine) {
+    }
 }
+

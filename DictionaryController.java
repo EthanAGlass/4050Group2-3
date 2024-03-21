@@ -40,11 +40,13 @@ public class DictionaryController implements Initializable {
         String family = "Helvetica";
         double size = 20;
         view.getChildren().clear();
-        
+
         for (int i = 0; i < lines.getCurrentLine(); i++) {
             TextFlow newLine = new TextFlow();
             newLine.getChildren().add(new Text(""));
-            Iterator<Wordlet> iter = lines.getLines()[i].getIterator();
+            AList<Wordlet> currentLineList = lines.getLines().getEntry(i + 1);
+            Iterator<Wordlet> iter = currentLineList.getIterator();
+
             while (iter.hasNext()) {
                 Wordlet word = iter.next();
                 Text checkedWord = new Text(word.getWord());

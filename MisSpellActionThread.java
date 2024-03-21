@@ -3,6 +3,10 @@ package assignment.dictionary;
 import java.io.*;
 import java.util.*;
 import javafx.application.Platform;
+import javafx.scene.shape.Line;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A Thread that contains the application we are going to animate
@@ -55,16 +59,18 @@ public class MisSpellActionThread implements Runnable {
             while (input.hasNextLine()) {
                 String line = input.nextLine();
                 Scanner lineScanner = new Scanner(line);
-                Line newLine = new Line();
 
+                // You directly work with 'currentLine' of 'LinesToDisplay'.
                 while (lineScanner.hasNext()) {
                     String word = lineScanner.next();
                     boolean correct = checkWord(word, theDictionary);
-                    newLine.addWordlet(new Wordlet(word, correct));
+
+                    // Directly add the Wordlet to the current line in LinesToDisplay
+                    myLines.getLines().getEntry(myLines.getCurrentLine() + 1).add(new Wordlet(word, correct));
                 }
 
-                myLines.addLine(newLine);
-                showLines(myLines);
+                // Advance to the next line in myLines after processing the current line
+                myLines.nextLine();
 
                 lineScanner.close();
             }
@@ -73,6 +79,8 @@ public class MisSpellActionThread implements Runnable {
             e.printStackTrace();
         }
     }
+
+
 
     public boolean checkWord(String word, DictionaryInterface<String, String> theDictionary) {
         return theDictionary.contains(word);
